@@ -1,0 +1,17 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import BlogPost from "../components/BlogPost.astro";
+import { getCollection } from "astro:content";
+const pageTitle = "ブログ投稿"
+
+const allPosts = await getCollection("posts");
+---
+
+<BaseLayout pageTitle={pageTitle}>
+  <h2>このブログページは今後学習していく内容をポストしていきます。</h2>
+  <ul>
+    {allPosts.map((post) => (
+      <BlogPost url={`/posts/${post.slug}`} title={post.data.title} />
+    ))}
+  </ul>
+</BaseLayout>
